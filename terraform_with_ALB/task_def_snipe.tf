@@ -1,3 +1,8 @@
+resource "aws_cloudwatch_log_group" "ecs_task" {
+  name = "node"
+}
+
+
 resource "aws_ecs_task_definition" "node-main" {
   family                   = "my_node_test-main"
   requires_compatibilities = ["FARGATE"]
@@ -16,7 +21,7 @@ resource "aws_ecs_task_definition" "node-main" {
         "logDriver": "awslogs",
         "secretOptions": null,
         "options": {
-          "awslogs-group": "/ecs/node",
+          "awslogs-group": "${aws_cloudwatch_log_group.ecs_task.name}",
           "awslogs-region": "ap-south-1",
           "awslogs-stream-prefix": "ecs"
         }
