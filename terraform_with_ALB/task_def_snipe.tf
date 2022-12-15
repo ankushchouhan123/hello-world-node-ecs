@@ -13,7 +13,7 @@ resource "aws_ecs_task_definition" "node-main" {
   task_role_arn            = aws_iam_role.ecs_task_execution_role.arn
 #   container_definitions    = data.template_file.testapp.rendered
    container_definitions    = <<TASK_DEFINITION
-   [
+ [
     {
       "dnsSearchDomains": null,
       "environmentFiles": null,
@@ -27,108 +27,28 @@ resource "aws_ecs_task_definition" "node-main" {
         }
       },
       "entryPoint": null,
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "protocol": "tcp",
-          "containerPort": 80
-        }
-      ],
+      "portMappings":null,
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
       "environment": [
         {
-          "name": "APP_DEBUG",
-          "value": "false"
+          "name": "RUNNER_NAME",
+          "value": "pd-gh-runner" 
         },
         {
-          "name": "APP_ENV",
-          "value": "production"
+          "name": "RUNNER_LABELS",
+          "value": "test1,test2"
         },
-        {
-          "name": "APP_KEY",
-          "value": "base64:Ep2LPUfshRkhf2NEJuvEcpFcHnyL3HbHIRKCHwbsLNc="
-        },
-        {
-          "name": "APP_LOCALE",
-          "value": "en"
-        },
-        {
-          "name": "APP_TIMEZONE",
-          "value": "US/Pacific"
-        },
-        {
-          "name": "APP_URL",
-          "value": "http://${module.rohan-alb.elb-dns-name}"
-        },
-        {
-          "name": "MAIL_ENV_ENCRYPTION",
-          "value": "tcp"
-        },
-        {
-          "name": "MAIL_ENV_FROM_ADDR",
-          "value": "youremail@yourdomain.com"
-        },
-        {
-          "name": "MAIL_ENV_FROM_NAME",
-          "value": "Your Full Email Name"
-        },
-        {
-          "name": "MAIL_ENV_PASSWORD",
-          "value": "your_email_password"
-        },
-        {
-          "name": "MAIL_ENV_USERNAME",
-          "value": "your_email_username"
-        },
-        {
-          "name": "MAIL_PORT_587_TCP_ADDR",
-          "value": "smtp.whatever.com"
-        },
-        {
-          "name": "MAIL_PORT_587_TCP_PORT",
-          "value": "587"
-        },
-        {
-          "name": "MYSQL_DATABASE",
-          "value": "nodeit"
-        },
-        {
-          "name": "MYSQL_PASSWORD",
-          "value": "YOUR_nodeit_USER_PASSWORD"
-        },
-        {
-          "name": "MYSQL_PORT_3306_TCP_ADDR",
-          "value": "example.node.terraform.com"
-        },
-        {
-          "name": "MYSQL_PORT_3306_TCP_PORT",
-          "value": "3306"
-        },
-        {
-          "name": "MYSQL_ROOT_PASSWORD",
-          "value": "YOUR_SUPER_SECRET_PASSWORD"
-        },
-        {
-          "name": "MYSQL_USER",
-          "value": "nodeit"
-        },
-        {
-          "name": "PHP_UPLOAD_LIMIT",
-          "value": "100"
+                {
+          "name": "GITHUB_OWNER",
+          "value": "PearlThoughts-GitHub-Actions"
         }
       ],
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
-      "mountPoints": [
-        {
-          "readOnly": null,
-          "containerPath": "/var/lib/nodeit",
-          "sourceVolume": "node-vol"
-        }
-      ],
+      "mountPoints": null,
       "workingDirectory": null,
       "secrets": null,
       "dockerSecurityOptions": null,
@@ -136,7 +56,7 @@ resource "aws_ecs_task_definition" "node-main" {
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "${data.aws_ecr_repository.example.repository_url}:${data.external.current_image.result["image_tag"]}",
+      "image":  "${data.aws_ecr_repository.example.repository_url}:${data.external.current_image.result["image_tag"]}",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -162,10 +82,10 @@ TASK_DEFINITION
     operating_system_family = "LINUX"
     
   }
-   volume {
-    name      = "node-vol"
-    # host_path = "/ecs/service-storage"
-  }
+  #  volume {
+  #   name      = "selfhosted-vol"
+  #   # host_path = "/ecs/service-storage"
+  # }
 }
 
 
