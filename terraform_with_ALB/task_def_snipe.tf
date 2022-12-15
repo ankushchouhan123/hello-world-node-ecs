@@ -27,7 +27,13 @@ resource "aws_ecs_task_definition" "node-main" {
         }
       },
       "entryPoint": null,
-      "portMappings":null,
+      "portMappings":[
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
@@ -94,7 +100,7 @@ resource "aws_ecs_service" "test-service-node-main" {
   name            = "testapp-service-node-main"
   cluster         = aws_ecs_cluster.foo.id
   task_definition = aws_ecs_task_definition.node-main.arn
-  desired_count   = 2
+  desired_count   = 1
   launch_type     = "FARGATE"
 
   network_configuration {
