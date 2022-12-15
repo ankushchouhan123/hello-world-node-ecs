@@ -29,7 +29,7 @@ resource "aws_ecs_task_definition" "node-main" {
       "entryPoint": null,
       "portMappings": [
         {
-          "hostPort": 80,
+          "hostPort": 3000,
           "protocol": "tcp",
           "containerPort": 3000
         }
@@ -185,7 +185,7 @@ resource "aws_ecs_service" "test-service-node-main" {
     load_balancer {
     target_group_arn = module.rohan-alb.elb-target-group-arn
     container_name   = "testapp"
-    container_port   = 80
+    container_port   = 3000
   }
 
   #depends_on = [aws_iam_role_policy_attachment.ecs_task_execution_role, aws_ecs_service.test-service-mysql]

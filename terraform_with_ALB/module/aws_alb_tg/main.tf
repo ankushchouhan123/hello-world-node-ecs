@@ -25,7 +25,7 @@ resource "aws_lb" "default" {
 }
 resource "aws_lb_target_group" "hello_world" {
   name        = var.tg_name
-  port        = 80
+  port        = 3000
   protocol    = "HTTP"
   vpc_id      = aws_default_vpc.default.id
   target_type = "ip"
