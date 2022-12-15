@@ -29,7 +29,7 @@ resource "aws_ecs_task_definition" "node-main" {
       "entryPoint": null,
       "portMappings": [
         {
-          "hostPort": 3000,
+          "hostPort": 80,
           "protocol": "tcp",
           "containerPort": 3000
         }
