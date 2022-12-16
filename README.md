@@ -71,3 +71,18 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
   Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+## Steps to provision
+
+1. Creat S3 bucket for terraform state file & update the name in 
+terraform_with_ALB/c1-version.tf line no 17
+
+2. Create ECR repo & update the name in .github/workflows/docker-image.yml line no 39
+
+3.  update AWS keys in action secrets  [ settings/secrets/actions ]       
+AWS_ACCESS_KEY_ID 
+.AWS_SECRET_ACCESS_KEY 
+
+4. RUN the Github actions & able to access the hello world from load balancer DNS Name
+
