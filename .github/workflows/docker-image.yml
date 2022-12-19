@@ -1,5 +1,5 @@
 ---
-name: "workflow1"
+name: "workflow2"
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
@@ -69,7 +69,8 @@ jobs:
         run: |
           cd terraform_with_ALB
           terraform apply -auto-approve -input=false
-      # - name: Terraform destroy
-      #   run: |
-      #     cd terraform_with_ALB
-      #     terraform destroy -auto-approve -input=false
+      
+      - name: Terraform destroy
+         run: |
+           cd terraform_with_ALB
+           terraform destroy -auto-approve -input=false
